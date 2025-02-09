@@ -1,1 +1,1 @@
-export const MAIN_URL = "https://api.shirley.lat";
+export const BASE_URL = "https://api.shirley.lat";
