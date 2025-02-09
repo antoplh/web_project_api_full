@@ -1,0 +1,70 @@
+.card {
+  position: relative;
+  background-color: #fff;
+  color: #000;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 361px;
+}
+.card__image {
+  width: 100%;
+  height: 78%;
+  object-fit: cover;
+  cursor: pointer;
+}
+.card__description {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 7% 6% 10%;
+}
+
+.card__title {
+  font-size: 1.5em;
+  font-weight: 900;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 90%;
+}
+
+.card__heart {
+  display: inline-block; /* ahora se podrá especificar el ancho y la altura del  span */
+  vertical-align: left; /* esta propiedad funciona en conjunto con inline-block */
+  background: url("../images/heart_deac.svg") no-repeat center;
+  width: 25px;
+  height: 25px;
+  transition: 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.card__heart::after {
+  content: attr(data-likes);
+  position: relative;
+  top: 20px;
+  font-size: 13px;
+}
+
+.card__heart:hover {
+  opacity: 70%;
+}
+
+.card__heart_active {
+  background: url("../images/heart_active.svg") no-repeat center;
+}
+
+.card__delete {
+  display: inline-block;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  background: url("../images/bin.png") no-repeat center;
+  width: 30px;
+  height: 30px;
+}
+
+.card__delete:hover {
+  opacity: 70%;
+  cursor: pointer;
+}

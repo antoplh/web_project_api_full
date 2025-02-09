@@ -1,0 +1,19 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+.page {
+  padding-top: 2%;
+  padding-bottom: 2%;
+  font-family: Inter;
+  background-color: #000;
+  color: #fff;
+  position: relative;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  width: fit-content;
+  height: fit-content;
+}

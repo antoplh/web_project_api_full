@@ -1,0 +1,97 @@
+.form {
+  margin: auto;
+}
+
+.form__set {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.form__button-close {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+}
+.form__button-close-img {
+  height: 100%;
+}
+.form__button-close:hover {
+  cursor: pointer;
+  opacity: 60%;
+}
+.form__title {
+  font-family: Inter;
+  font-size: 25px;
+  font-weight: 900;
+  line-height: 29.05px;
+  text-align: left;
+  margin-bottom: 8%;
+}
+
+.form__input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.2);
+  font-size: 15px;
+  padding: 14px 0;
+  margin-bottom: 3%;
+}
+.form__input::placeholder {
+  color: #c4c4c4;
+  font-size: 15px;
+}
+.form__button-save {
+  margin-top: 7%;
+  background-color: white;
+  color: #c4c4c4;
+  border: 1px solid #c4c4c4;
+  width: 100%;
+  height: fit-content;
+  padding: 18px;
+
+  align-self: flex-end;
+}
+
+.form__button-save_active {
+  color: white;
+  background-color: black;
+  border: 1px solid black;
+}
+
+.form__button-save_active:hover {
+  cursor: pointer;
+  opacity: 80%;
+}
+.form__set {
+  width: 100%;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.form__input_type_error {
+  border-bottom-color: red;
+}
+.form__input-error {
+  color: red;
+  opacity: 0;
+  font-size: 12px;
+  transition: opacity 0.3s ease;
+}
+.form__input-error_active {
+  opacity: 1;
+}
+
+@media screen and (max-width: 320px) {
+  .form {
+    height: 100%;
+  }
+  .form__title {
+    font-size: 18px;
+  }
+  .form__button-close {
+    right: 5px;
+    top: -45px;
+    height: 26px;
+  }
+}
