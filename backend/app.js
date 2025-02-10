@@ -34,6 +34,8 @@ mongoose
 // Global error handler
 app.use(errorHandler);
 
-app.listen(3000, () => {
-  console.log('Servidor ejecutándose en el puerto 3000');
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Servidor ejecutándose en el puerto ${PORT}`);
 });
