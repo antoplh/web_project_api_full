@@ -23,6 +23,8 @@ app.post('/signup', createUser);
 // Protected routes
 const userRoutes = require('./routes/users');
 app.use('/users', auth, userRoutes);
+const cardRoutes = require('./routes/cards');
+app.use('/cards', auth, cardRoutes);
 
 app.use(errorLogger);
 
