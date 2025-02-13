@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const SECRET_KEY = process.env.JWT_SECRET || 'secret_key'; // Asegúrate de que coincida con el de loginUser
 
 const auth = (req, res, next) => {
   const authHeader = req.headers.authorization;
@@ -12,7 +13,7 @@ const auth = (req, res, next) => {
   const token = authHeader.split(' ')[1];
 
   try {
-    const payload = jwt.verify(token, process.env.JWT_SECRET || 'secret_key'); // Se añade la clave
+    const payload = jwt.verify(token, SECRET_KEY);
     req.user = payload; // Guardar el payload en req.user
     next();
   } catch (err) {
