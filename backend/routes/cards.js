@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { validateCard } = require('../middleware/validators');
 
-router.post('/cards', validateCard, createCard);
-
 const {
   getCards,
   createCard,
