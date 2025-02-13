@@ -32,6 +32,7 @@ function App() {
 
   useEffect(() => {
     if (token) {
+      api.setToken(token);
       validateToken(token)
         .then((data) => {
           setIsAuthenticated(true);
