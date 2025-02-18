@@ -28,23 +28,29 @@ const createCard = async (req, res, next) => {
 const deleteCard = async (req, res, next) => {
   try {
     const { cardId } = req.params;
+
+    // Verificar si el cardId es válido antes de intentar buscar la tarjeta
+    if (!mongoose.Types.ObjectId.isValid(cardId)) {
+      return res.status(400).json({ message: 'ID de tarjeta inválido' });
+    }
+
     const card = await Card.findById(cardId);
-    console.log(card, 'encontrada');
+
     if (!card) {
       return res.status(404).json({ message: 'Tarjeta no encontrada' });
     }
-    // Log para verificar que req.user está correcto
-    console.log(req.user, 'usuario actual');
 
-    // Solo el dueño de la tarjeta puede eliminarla
     if (String(card.owner) !== String(req.user._id)) {
       return res
         .status(403)
         .json({ message: 'No autorizado para eliminar esta tarjeta' });
     }
+
     await Card.findByIdAndRemove(cardId);
+
     res.status(200).json({ message: 'Tarjeta eliminada correctamente' });
   } catch (err) {
+    console.error('Error al eliminar la tarjeta:', err); // Log adicional para depuración
     next(err);
   }
 };
