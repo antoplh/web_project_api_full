@@ -33,6 +33,9 @@ const deleteCard = async (req, res, next) => {
     if (!card) {
       return res.status(404).json({ message: 'Tarjeta no encontrada' });
     }
+    // Log para verificar que req.user está correcto
+    console.log(req.user, 'usuario actual');
+
     // Solo el dueño de la tarjeta puede eliminarla
     if (String(card.owner) !== String(req.user._id)) {
       return res
