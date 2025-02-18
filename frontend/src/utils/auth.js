@@ -97,7 +97,7 @@ export const validateToken = (token) => {
       }
       return response.json();
     })
-    .then((data) => data.data)
+    .then((data) => data)
     .catch((error) => {
       console.error("Token validation failed:", error);
       throw error;

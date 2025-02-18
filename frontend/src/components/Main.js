@@ -87,12 +87,6 @@ function Main({
               onCardLike={onCardLike}
               onCardDelete={handleRemoveCard}
             />
-            <button
-              onClick={() => handleRemoveCard(card)}
-              className="card__delete-button"
-            >
-              Eliminar
-            </button>
           </div>
         ))}
       </section>

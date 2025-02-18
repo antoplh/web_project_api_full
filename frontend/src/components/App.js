@@ -26,7 +26,7 @@ function App() {
   const [selectedCard, setSelectedCard] = useState("");
   const [cards, setCards] = useState([]);
   const [isConfirmPopupOpen, setIsConfirmPopupOpen] = useState(false);
-  const [cardToDelete, setCardToDelete] = useState("");
+  const [cardToDelete, setCardToDelete] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("jwt"));
   const handleEditAvatarClick = () => setIsEditAvatarPopupOpen(true);
 
@@ -70,7 +70,7 @@ function App() {
         .then((userInfo) => {
           setCurrentUser((prevState) => ({
             ...userInfo,
-            email: userFromToken.email,
+            email: userFromToken?.email || userInfo.email,
           }));
         })
         .catch((error) => {
@@ -92,20 +92,22 @@ function App() {
     }
   }, [isAuthenticated, userFromToken]);
 
-  const handleDeleteConfirm = () => {
-    if (cardToDelete) {
-      return api
-        .deleteCard(cardToDelete._id)
-        .then(() => {
-          setCards((prevCards) =>
-            prevCards.filter((card) => card._id !== cardToDelete._id)
-          );
-          setIsConfirmPopupOpen(false);
-        })
-        .catch((error) =>
-          console.error(`Error al eliminar la tarjeta: ${error}`)
-        );
+  const handleDeleteConfirm = (card) => {
+    if (!card || !card._id) {
+      console.error("Error: No se puede eliminar una tarjeta inválida.", card);
+      return;
     }
+
+    api
+      .deleteCard(card._id)
+      .then(() => {
+        setCards((prevCards) => prevCards.filter((c) => c._id !== card._id));
+        setIsConfirmPopupOpen(false);
+        setCardToDelete(null); // Limpiar el estado después de la eliminación
+      })
+      .catch((error) =>
+        console.error(`Error al eliminar la tarjeta: ${error}`)
+      );
   };
 
   // Actualizar avatar
@@ -144,6 +146,7 @@ function App() {
     const isLiked = card.likes.some((user) => user._id === currentUser._id);
     try {
       const response = await api.changeLikeCardStatus(card._id, !isLiked);
+      console.log("card liked", card._id, isLiked);
       const newCard = response; // Suponiendo que `response` ya sea el objeto JSON
       setCards((state) =>
         state.map((currentCard) =>
@@ -230,7 +233,8 @@ function App() {
         <ConfirmPopup
           isOpen={isConfirmPopupOpen}
           onClose={() => setIsConfirmPopupOpen(false)}
-          onConfirm={handleDeleteConfirm}
+          onConfirmDelete={() => handleDeleteConfirm(cardToDelete)}
+          card={cardToDelete}
         />
         <Footer />
       </div>
