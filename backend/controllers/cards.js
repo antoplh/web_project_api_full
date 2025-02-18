@@ -46,11 +46,12 @@ const deleteCard = async (req, res, next) => {
         .json({ message: 'No autorizado para eliminar esta tarjeta' });
     }
 
-    await Card.findByIdAndRemove(cardId);
+    // Usar findByIdAndDelete en lugar de findByIdAndRemove
+    await Card.findByIdAndDelete(cardId);
 
     res.status(200).json({ message: 'Tarjeta eliminada correctamente' });
   } catch (err) {
-    console.error('Error al eliminar la tarjeta:', err); // Log adicional para depuración
+    console.error('Error al eliminar la tarjeta:', err);
     next(err);
   }
 };
