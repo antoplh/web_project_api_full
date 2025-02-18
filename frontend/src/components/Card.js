@@ -12,11 +12,9 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   const cardLikeButtonClassName = `card__heart ${
     isLiked ? "card__heart_active" : ""
   }`;
-  console.log(card.likes);
 
   // Verificar si el usuario actual es el dueño de esta tarjeta
   const isOwner = card.owner === currentUser._id;
-  console.log(card.owner, currentUser._id, isOwner);
 
   const handleLikeClick = () => onCardLike(card);
   // const handleDeleteClick = () => onCardDelete(card);
