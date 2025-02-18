@@ -137,17 +137,30 @@ function App() {
     setIsConfirmPopupOpen(false);
     setSelectedCard(null);
   };
+  useEffect(() => {
+    const handleEscapeKey = (e) => {
+      if (e.key === "Escape") {
+        closeAllPopups();
+      }
+    };
+
+    window.addEventListener("keydown", handleEscapeKey);
+
+    // Limpiar el evento cuando el componente se desmonta
+    return () => {
+      window.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, []);
 
   if (isLoading) {
     return <div>Cargando...</div>; // Puedes usar un spinner o cualquier indicador de carga aquí
   }
 
   const handleCardLike = async (card) => {
-    const isLiked = card.likes.some((user) => user._id === currentUser._id);
+    const isLiked = card.likes.some((like) => like === currentUser._id);
     try {
       const response = await api.changeLikeCardStatus(card._id, !isLiked);
-      console.log("card liked", card._id, isLiked);
-      const newCard = response; // Suponiendo que `response` ya sea el objeto JSON
+      const newCard = response; // Suponiendo que `response` ya sea el objeto actualizado
       setCards((state) =>
         state.map((currentCard) =>
           currentCard._id === card._id ? newCard : currentCard

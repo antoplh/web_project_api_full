@@ -1,3 +1,4 @@
+// ConfirmPopup.js
 import React from "react";
 import closeButton from "../images/Close_Icon.png";
 
@@ -22,6 +23,9 @@ function ConfirmPopup({ isOpen, onClose, onConfirmDelete, card }) {
           onClick={handleConfirm}
         >
           Sí
+        </button>
+        <button className="popup__close" type="button" onClick={onClose}>
+          <img src={closeButton} alt="Cerrar" />
         </button>
       </div>
     </div>

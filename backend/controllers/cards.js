@@ -28,6 +28,7 @@ const createCard = async (req, res, next) => {
 const deleteCard = async (req, res, next) => {
   try {
     const { cardId } = req.params;
+    console.log('cardId recibido:', cardId);
     const card = await Card.findById(cardId);
     if (!card) {
       return res.status(404).json({ message: 'Tarjeta no encontrada' });

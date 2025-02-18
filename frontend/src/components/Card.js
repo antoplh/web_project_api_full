@@ -1,3 +1,4 @@
+// Card.js
 import { useContext } from "react";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import binIcon from "../images/bin.png";
@@ -8,7 +9,7 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   const currentUser = useContext(CurrentUserContext);
 
   // Verificar si el usuario actual dio like a esta tarjeta
-  const isLiked = card.likes.some((user) => user._id === currentUser._id);
+  const isLiked = card.likes.some((like) => like === currentUser._id);
   const cardLikeButtonClassName = `card__heart ${
     isLiked ? "card__heart_active" : ""
   }`;
@@ -17,7 +18,7 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   const isOwner = card.owner === currentUser._id;
 
   const handleLikeClick = () => onCardLike(card);
-  // const handleDeleteClick = () => onCardDelete(card);
+  const handleDeleteClick = () => onCardDelete(card);
 
   return (
     <div className="card">
@@ -25,7 +26,7 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
         <button
           alt="delete"
           className="card__delete"
-          onClick={onCardDelete(card)}
+          onClick={handleDeleteClick} // Pasar la función como referencia
           style={{
             backgroundImage: `url(${binIcon})`,
           }}
@@ -41,7 +42,7 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
         <h3 className="card__title">{card.name}</h3>
         <button
           className={cardLikeButtonClassName}
-          onClick={handleLikeClick}
+          onClick={handleLikeClick} // Asegúrate de pasar la función como referencia
           style={{
             backgroundImage: `url(${isLiked ? heartActiveIcon : heartIcon})`,
           }}
