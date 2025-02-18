@@ -1,5 +1,5 @@
 const Card = require('../models/card');
-
+const mongoose = require('mongoose'); // Importa mongoose
 // Obtener todas las tarjetas
 const getCards = async (req, res, next) => {
   try {
