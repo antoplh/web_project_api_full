@@ -105,9 +105,13 @@ function App() {
         setIsConfirmPopupOpen(false);
         setCardToDelete(null); // Limpiar el estado después de la eliminación
       })
-      .catch((error) =>
-        console.error(`Error al eliminar la tarjeta: ${error}`)
-      );
+      .catch((error) => {
+        // Imprimir el mensaje específico del error
+        const errorMessage = error.response
+          ? error.response.data.message
+          : error.message;
+        console.error(`Error al eliminar la tarjeta: ${errorMessage}`);
+      });
   };
 
   // Actualizar avatar
