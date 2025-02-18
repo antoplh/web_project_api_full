@@ -8,9 +8,7 @@ function ConfirmPopup({ isOpen, onClose, onConfirmDelete, card }) {
       console.error("Error: No se ha seleccionado una tarjeta válida.");
       return;
     }
-    console.log("Confirmando eliminación de tarjeta:", card);
     onConfirmDelete(card); // Eliminar tarjeta
-    onClose(); // Cerrar popup
   };
 
   return (

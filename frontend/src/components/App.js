@@ -103,7 +103,7 @@ function App() {
       .then(() => {
         setCards((prevCards) => prevCards.filter((c) => c._id !== card._id));
         setIsConfirmPopupOpen(false);
-        setCardToDelete(null); // Limpiar el estado después de la eliminación
+        setCardToDelete(null);
       })
       .catch((error) => {
         // Imprimir el mensaje específico del error
@@ -111,6 +111,9 @@ function App() {
           ? error.response.data.message
           : error.message;
         console.error(`Error al eliminar la tarjeta: ${errorMessage}`);
+      })
+      .finally(() => {
+        setIsConfirmPopupOpen(false); // Asegúrate de que el popup se cierre después de la eliminación
       });
   };
 
